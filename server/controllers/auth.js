@@ -1,4 +1,5 @@
 import User from "../models/user";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   console.log(req.body);
@@ -23,5 +24,34 @@ export const register = async (req, res) => {
   } catch (err) {
     console.log("Create User Failed", err);
     return res.status(400).send("Error. Try again.");
+  }
+};
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    let user = await User.findOne({ email }).exec();
+    if (!user) return res.status(400).send("Email address is not registered.");
+    user.comparePassword(password, (err, match) => {
+      if (!match || err) return res.status(400).send("Password is incorrect.");
+
+      //GENERATE A TOKEN AND THEN SEND AS RESPONSE TO CLIENT
+      let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "30d",
+      });
+      res.json({
+        token,
+        user: {
+          _id: user.id,
+          name: user.name,
+          email: user.email,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        },
+      });
+    });
+  } catch (err) {
+    console.log("LOGIN ERROR", err);
+    return res.status(400).send("Signin Failed.");
   }
 };

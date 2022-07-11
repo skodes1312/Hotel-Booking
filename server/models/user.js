@@ -45,4 +45,15 @@ userSchema.pre("save", function (next) {
   }
 });
 
+userSchema.methods.comparePassword = function (password, next) {
+  bcrypt.compare(password, this.password, function (err, res) {
+    if (err) {
+      console.log("COMPARE PASSWORD ERROR", err);
+      return next(err, false);
+    }
+    console.log("MATCH PASSWORD", res);
+    return next(null, res);
+  });
+};
+
 export default mongoose.model("User", userSchema);
