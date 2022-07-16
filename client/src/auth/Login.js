@@ -30,7 +30,7 @@ const Login = () => {
           payload: res.data,
         });
         toast.success("Login Successful.");
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (err) {
       console.log(err);
@@ -47,7 +47,7 @@ const Login = () => {
       ;
       <div className="container">
         <div className="row">
-          <div className="col-mid-6 offset-md-3">
+          <div className="col-md-6 offset-md-3">
             <LoginForm
               email={email}
               setEmail={setEmail}

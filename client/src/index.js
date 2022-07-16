@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "antd/dist/antd.css";
+import { loadStripe } from "@stripe/stripe-js";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
