@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./user/Dashboard";
 import DashboardSeller from "./user/DashboardSeller";
 import NewHotel from "./hotels/NewHotel";
+import StripeCallback from "./stripe/StripeCallback";
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +38,14 @@ function App() {
           element={
             <ProtectedRoute>
               <NewHotel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/stripe/callback"
+          element={
+            <ProtectedRoute>
+              <StripeCallback />
             </ProtectedRoute>
           }
         />

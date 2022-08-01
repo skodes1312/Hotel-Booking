@@ -13,8 +13,9 @@ const DashboardSeller = () => {
     setLoading(true);
     try {
       let res = await createConnectAccount(auth.token);
-      //Stripe LOGIN
-      console.log(res);
+      //Stripe onboarding
+      window.location.href = res.data;
+      // console.log(res);
     } catch (err) {
       console.log("STRIPE SIGNUP ERROR", err);
       toast.error("Stripe connect failed, Try again");
@@ -31,8 +32,8 @@ const DashboardSeller = () => {
               <HomeOutlined className="h1" />
               <h4>Setup payouts to post hotel</h4>
               <p className="lead">
-                MERN partners with Stripe to transfer the earnings into your
-                account
+                Happy Stay partners with Stripe to transfer the earnings into
+                your account
               </p>
               <button
                 disabled={loading}
@@ -70,7 +71,7 @@ const DashboardSeller = () => {
   };
   return (
     <>
-      <div className="container-fluid text-center bg-secondary p-5">
+      <div className="container-fluid text-center bg-dark p-5">
         <ConnectNav />
       </div>
       <div className="container-fluid p-4">

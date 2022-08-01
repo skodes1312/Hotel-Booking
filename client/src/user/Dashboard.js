@@ -4,7 +4,7 @@ import ConnectNav from "../components/ConnectNav";
 const Dashboard = () => {
   return (
     <>
-      <div className="container-fluid text-center bg-secondary p-5">
+      <div className="container-fluid text-center bg-dark p-5">
         <ConnectNav />
       </div>
       <div className="container-fluid p-4">
