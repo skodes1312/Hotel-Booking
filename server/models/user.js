@@ -22,7 +22,7 @@ const userSchema = new Schema(
       min: 6,
       max: 64,
     },
-    stripe_accound_id: "",
+    stripe_account_id: "",
     stripe_seller: {},
     stripeSession: {},
   },
