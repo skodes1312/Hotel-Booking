@@ -1,7 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { diffdays } from "../../actions/hotel";
-const SmallCard = ({ h, deleteHandler = (f) => f }) => {
+import { currencyFormatter } from "../../actions/auth";
+const SmallCard = ({
+  h,
+  deleteHandler = (f) => f,
+  owner = false,
+  showViewMoreButton = true,
+}) => {
   const navigate = useNavigate();
   return (
     <>
@@ -25,7 +31,17 @@ const SmallCard = ({ h, deleteHandler = (f) => f }) => {
           <div className="col-md-8">
             <div className="card-body">
               {" "}
-              <h3 className="card-title">{h.title}</h3>
+              <h3 className="card-title">
+                {h.title}
+                {"     "}
+                <span className="float-right text-primary">
+                  {currencyFormatter({
+                    amount: h.price,
+                    currency: "inr",
+                  })}
+                </span>
+                {"     "}
+              </h3>
               <p className="alert alert-info h6">{h.location}</p>
               <div className="card-text">{`${h.content.substring(
                 1,
@@ -42,19 +58,25 @@ const SmallCard = ({ h, deleteHandler = (f) => f }) => {
                 Available from {new Date(h.from).toLocaleDateString()}
               </p>
               <div className="d-flex justify-content-between h4">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => navigate(`/hotel/${h._id}`)}
-                >
-                  Show more
-                </button>
-                <Link to={`/hotel/edit/${h._id}`}>
-                  <EditOutlined className="text-warning" />
-                </Link>
-                <DeleteOutlined
-                  onClick={() => deleteHandler(h._id)}
-                  className="text-danger"
-                />
+                {showViewMoreButton && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => navigate(`/hotel/${h._id}`)}
+                  >
+                    Show more
+                  </button>
+                )}
+                {owner && (
+                  <>
+                    <Link to={`/hotel/edit/${h._id}`}>
+                      <EditOutlined className="text-warning" />
+                    </Link>
+                    <DeleteOutlined
+                      onClick={() => deleteHandler(h._id)}
+                      className="text-danger"
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -10,6 +10,8 @@ import Dashboard from "./user/Dashboard";
 import DashboardSeller from "./user/DashboardSeller";
 import NewHotel from "./hotels/NewHotel";
 import StripeCallback from "./stripe/StripeCallback";
+import EditHotel from "./hotels/EditHotel";
+
 function App() {
   return (
     <BrowserRouter>
@@ -46,6 +48,14 @@ function App() {
           element={
             <ProtectedRoute>
               <StripeCallback />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hotel/edit/:hotelID"
+          element={
+            <ProtectedRoute>
+              <EditHotel />
             </ProtectedRoute>
           }
         />
