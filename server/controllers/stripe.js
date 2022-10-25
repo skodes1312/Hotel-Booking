@@ -79,7 +79,7 @@ export const getAccBalance = async (req, res) => {
     // console.log(balance);
     res.json(balance);
   } catch (err) {
-    conole.log(err);
+    console.log(err);
   }
 };
 
